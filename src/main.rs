@@ -14,10 +14,10 @@ use rust_embed::RustEmbed;
 use clap::Parser;
 use rand::seq::SliceRandom;
 use base64::{engine::general_purpose, Engine};
-use libc::{ftruncate, mmap, munmap, shm_open, close, memcpy};   //, memcpy, strncpy};
+use libc::{ftruncate, mmap, munmap, shm_open, close, memcpy};
 use libc::{MAP_SHARED, O_RDWR, O_CREAT, PROT_WRITE, S_IRUSR, S_IWUSR};
 use libc::{c_char, c_void, off_t, size_t};
-use std::{ptr, str}; // , env}
+use std::{ptr, str};
 use crossterm::cursor::{MoveRight, MoveToNextLine, MoveToPreviousLine};
 use crossterm::execute;
 use console::{Term, Key};
@@ -145,8 +145,8 @@ fn create_shared_memory(storage_id: *const c_char, data: &[u8]) -> *mut c_void {
     // Create shared memory mapping
     let addr: *mut c_void = unsafe {
         let null = ptr::null_mut();
-        //let fd   = shm_open(STORAGE_ID, O_RDWR | O_CREAT, (S_IRUSR | S_IWUSR) as size_t);
-        let fd   = shm_open(storage_id, O_RDWR | O_CREAT, (S_IRUSR | S_IWUSR) as size_t);
+        //let fd   = shm_open(storage_id, O_RDWR | O_CREAT, (S_IRUSR | S_IWUSR) as size_t);
+        let fd   = shm_open(storage_id, O_RDWR | O_CREAT, (S_IRUSR | S_IWUSR) as u32);
         let _res = ftruncate(fd, data.len() as off_t);
         let addr = mmap(null, data.len() as size_t, PROT_WRITE, MAP_SHARED, fd, 0);
         close(fd);

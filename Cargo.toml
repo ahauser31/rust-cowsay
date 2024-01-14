@@ -1,6 +1,6 @@
 [package]
 name = "cowsay"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Andreas Hauser <ahauser31@hotmail.com>", "Matt Smith <matthew.smith491@gmail.com>"]
 description = "Cowsay implemented in rust"
 

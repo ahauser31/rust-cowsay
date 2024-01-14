@@ -338,7 +338,7 @@ fn make_bubble(s: String, width: usize, thinking: bool, wrap: bool, modern: bool
 
     // Linewrap
 
-    let slice: Vec<String> = s.lines().map(str::to_string).collect();
+    let slice: Vec<String> = s.lines().map(|tmp| str::to_string(tmp).replace("\t", "    ")).collect();
     for line in slice {
         if line.chars().count() <= width {
             // The entire line fits without issues
